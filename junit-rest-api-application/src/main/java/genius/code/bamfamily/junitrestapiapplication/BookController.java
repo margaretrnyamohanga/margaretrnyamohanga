@@ -1,7 +1,6 @@
 package genius.code.bamfamily.junitrestapiapplication;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,15 +49,11 @@ public class BookController {
 
     }
 
-    // TODO: Write Delete endpoint
-
     @DeleteMapping(value = "{bookId}")
     public void deleteBookById(@PathVariable(value = "bookId") Long bookId) throws ClassNotFoundException {
-        //we do a check repository first of if the book is present to delete or not present
         if(!bookRepository.findById(bookId).isPresent()) {
             throw new ClassNotFoundException("bookId" + bookId + " not present");
 
         }
-        bookRepository.deleteById(bookId);
-    }
+        bookRepository.deleteById(bookId);    }
 }
